@@ -1,8 +1,13 @@
+<canvas id="game" width="400" height="400"></canvas>
+<div>Score: <span id="score">0</span></div>
+
+<script>
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const grid = 20;
 let count = 0;
 let score = 0;
+const speed = 8; // lower is faster
 
 const snake = {
   x: 160,
@@ -27,10 +32,41 @@ function resetApple() {
   apple.y = getRandomInt(0, 20) * grid;
 }
 
+function drawApple() {
+  ctx.beginPath();
+  ctx.arc(apple.x + grid / 2, apple.y + grid / 2, grid / 2 - 2, 0, Math.PI * 2);
+  ctx.fillStyle = '#e63946';
+  ctx.fill();
+  // stem
+  ctx.fillStyle = '#6b705c';
+  ctx.fillRect(apple.x + grid / 2 - 1, apple.y + 2, 2, 6);
+  // leaf
+  ctx.beginPath();
+  ctx.arc(apple.x + grid / 2 + 4, apple.y + 4, 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#2a9d8f';
+  ctx.fill();
+}
+
+function drawSnakeSegment(cell, index) {
+  const head = index === 0;
+  ctx.fillStyle = head ? '#6a994e' : '#a7c957';
+  ctx.beginPath();
+  ctx.arc(cell.x + grid / 2, cell.y + grid / 2, grid / 2, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (head) {
+    ctx.fillStyle = '#000';
+    ctx.beginPath();
+    ctx.arc(cell.x + grid / 2 - 3, cell.y + grid / 2 - 3, 2, 0, Math.PI * 2);
+    ctx.arc(cell.x + grid / 2 + 3, cell.y + grid / 2 - 3, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
 function loop() {
   requestAnimationFrame(loop);
 
-  if (++count < 4) {
+  if (++count < speed) {
     return;
   }
   count = 0;
@@ -57,12 +93,10 @@ function loop() {
     snake.cells.pop();
   }
 
-  ctx.fillStyle = 'red';
-  ctx.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+  drawApple();
 
-  ctx.fillStyle = '#0f0';
   snake.cells.forEach(function(cell, index) {
-    ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+    drawSnakeSegment(cell, index);
 
     if (cell.x === apple.x && cell.y === apple.y) {
       snake.maxCells++;
@@ -105,3 +139,4 @@ document.addEventListener('keydown', function(e) {
     snake.dx = 0;
   }
 });
+</script>

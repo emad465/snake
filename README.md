@@ -1,6 +1,6 @@
 # Flask Snake
 
-A simple snake game served with [Flask](https://flask.palletsprojects.com/). The game is rendered on an HTML canvas and controlled with the arrow keys.
+
 
 ## Running locally
 
@@ -16,5 +16,5 @@ A simple snake game served with [Flask](https://flask.palletsprojects.com/). The
 
 ## Controls
 
-Use the arrow keys to move the snake. Eat the red apples to grow. Avoid running into yourself!
+
 
