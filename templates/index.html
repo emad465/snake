@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flask Snake</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="game-wrapper">
+      <h1>Snake</h1>
+      <canvas id="game" width="400" height="400"></canvas>
+      <div class="score-board">Score: <span id="score">0</span></div>
+    </div>
+    <script src="{{ url_for('static', filename='snake.js') }}"></script>
+  </body>
+</html>
