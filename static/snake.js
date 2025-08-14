@@ -1,3 +1,7 @@
+<canvas id="game" width="400" height="400"></canvas>
+<div>Score: <span id="score">0</span></div>
+
+<script>
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const grid = 20;
@@ -135,3 +139,4 @@ document.addEventListener('keydown', function(e) {
     snake.dx = 0;
   }
 });
+</script>
